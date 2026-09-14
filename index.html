@@ -109,9 +109,7 @@
                 <i class="fa-solid fa-key text-amber-500 text-xs"></i>
                 <input type="password" id="apiKeyInput" placeholder="Enter Gemini API Key..." 
                        class="bg-transparent text-xs text-slate-200 placeholder-slate-500 focus:outline-none w-48 sm:w-60" />
-                <button id="saveKeyBtn" class="text-xs bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold px-2.5 py-1 rounded transition">
-                    Save
-                </button>
+                <button id="saveKeyBtn" class="text-xs bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold px-2.5 py-1 rounded transition">Save</button>
                 <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" 
                    class="text-xs text-amber-400/80 hover:text-amber-300 underline flex items-center gap-1 pl-1">
                    <span>Get Key</span>
@@ -524,7 +522,7 @@ AGENCY 3 — ROADS LOG: 2015 Fiber (~1m), 2020 Emergency BWSSB repair hit unmark
             try {
                 const ai = new GoogleGenAI({ apiKey: key });
                 const response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
+                    model: 'gemini-2.0-flash',
                     contents: `You are Nagar Smriti AI. Synthesize these municipal records to answer the user request:\n${DEMO_DATA}\nUser Question: ${query}`
                 });
 
@@ -560,7 +558,7 @@ AGENCY 3 — ROADS LOG: 2015 Fiber (~1m), 2020 Emergency BWSSB repair hit unmark
             try {
                 const ai = new GoogleGenAI({ apiKey: key });
                 const response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
+                    model: 'gemini-2.0-flash',
                     contents: `Evaluate excavation risk for Agency: ${agency} digging at Depth: ${depth}. Context:\n${DEMO_DATA}\nGive a clear verdict (APPROVED WITH CONDITIONAL RISKS or REJECTED) and explain why.`
                 });
 
@@ -573,4 +571,4 @@ AGENCY 3 — ROADS LOG: 2015 Fiber (~1m), 2020 Emergency BWSSB repair hit unmark
         };
     </script>
 </body>
-                            </html>
+</html>
