@@ -355,7 +355,7 @@
                             <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
                             <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Reconciled Institutional Synthesis</span>
                         </div>
-                        <span class="text-[10px] font-mono text-slate-500">Model: gemini-2.0-flash</span>
+                        <span class="text-[10px] font-mono text-slate-500">Model: gemini-3.6-flash</span>
                     </div>
 
                     <div id="queryLoadingState" class="hidden py-8 flex flex-col items-center justify-center text-center space-y-3">
@@ -446,7 +446,7 @@
     </main>
 
     <footer class="border-t border-slate-800/80 bg-slate-950 py-4 text-center text-xs text-slate-500">
-        <p>Nagar Smriti Proof-of-Concept • Powered by Google Gemini 2.0 Flash</p>
+        <p>Nagar Smriti Proof-of-Concept • Powered by Google Gemini 3.6 Flash</p>
     </footer>
 
     <!-- JS Logic -->
@@ -522,7 +522,7 @@ AGENCY 3 — ROADS LOG: 2015 Fiber (~1m), 2020 Emergency BWSSB repair hit unmark
             try {
                 const ai = new GoogleGenAI({ apiKey: key });
                 const response = await ai.models.generateContent({
-                    model: 'gemini-2.0-flash',
+                    model: 'gemini-3.6-flash',
                     contents: `You are Nagar Smriti AI. Synthesize these municipal records to answer the user request:\n${DEMO_DATA}\nUser Question: ${query}`
                 });
 
@@ -558,7 +558,7 @@ AGENCY 3 — ROADS LOG: 2015 Fiber (~1m), 2020 Emergency BWSSB repair hit unmark
             try {
                 const ai = new GoogleGenAI({ apiKey: key });
                 const response = await ai.models.generateContent({
-                    model: 'gemini-2.0-flash',
+                    model: 'gemini-3.6-flash',
                     contents: `Evaluate excavation risk for Agency: ${agency} digging at Depth: ${depth}. Context:\n${DEMO_DATA}\nGive a clear verdict (APPROVED WITH CONDITIONAL RISKS or REJECTED) and explain why.`
                 });
 
