@@ -50,36 +50,6 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .citation-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.125rem 0.375rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.025em;
-            text-transform: uppercase;
-            margin: 0 0.125rem;
-        }
-
-        .citation-bwssb {
-            background-color: rgba(14, 165, 233, 0.2);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.4);
-        }
-
-        .citation-bescom {
-            background-color: rgba(234, 179, 8, 0.2);
-            color: #fde047;
-            border: 1px solid rgba(250, 204, 21, 0.4);
-        }
-
-        .citation-roads {
-            background-color: rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-            border: 1px solid rgba(248, 113, 113, 0.4);
-        }
-
         .stamped-paper {
             background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.05), transparent 70%), #131c31;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
@@ -101,7 +71,6 @@
             pointer-events: none;
         }
 
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -140,7 +109,7 @@
                 <i class="fa-solid fa-key text-amber-500 text-xs"></i>
                 <input type="password" id="apiKeyInput" placeholder="Enter Gemini API Key..." 
                        class="bg-transparent text-xs text-slate-200 placeholder-slate-500 focus:outline-none w-48 sm:w-60" />
-                <button id="saveKeyBtn" onclick="saveApiKey()" class="text-xs bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold px-2.5 py-1 rounded transition">
+                <button id="saveKeyBtn" class="text-xs bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold px-2.5 py-1 rounded transition">
                     Save
                 </button>
                 <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" 
@@ -153,22 +122,19 @@
 
         <!-- Navigation Tabs -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 border-t border-slate-800/60 mt-1">
-            <button onclick="switchTab('records')" id="tab-records" 
-                    class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-amber-500 text-amber-400 flex items-center gap-2 transition">
+            <button id="tab-records" class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-amber-500 text-amber-400 flex items-center gap-2 transition">
                 <i class="fa-solid fa-folder-open text-xs"></i>
                 <span>Agency Records</span>
                 <span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded-full">3 Raw Sources</span>
             </button>
 
-            <button onclick="switchTab('query')" id="tab-query" 
-                    class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+            <button id="tab-query" class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
                 <i class="fa-solid fa-brain text-xs"></i>
                 <span>Ask Nagar Smriti</span>
                 <span class="text-[10px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-full">AI Reconciler</span>
             </button>
 
-            <button onclick="switchTab('permit')" id="tab-permit" 
-                    class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+            <button id="tab-permit" class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
                 <i class="fa-solid fa-shield-cat text-xs"></i>
                 <span>Permit Check</span>
                 <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-full">Preventive Risk</span>
@@ -343,32 +309,32 @@
                     Ask plain-language questions. Gemini will synthesize across agency records, cite specific departmental logs, and highlight contradictions.
                 </p>
 
-                <!-- Pre-populated Quick Prompt Buttons -->
+                <!-- Quick Prompt Buttons -->
                 <div class="space-y-2 mb-4">
-                    <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Suggested Hackathon Queries:</p>
+                    <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Suggested Queries:</p>
                     <div class="flex flex-wrap gap-2">
-                        <button onclick="useQuickQuery('What utilities run under this stretch of road?')" 
-                                class="text-xs bg-slate-800 hover:bg-slate-700 hover:text-amber-300 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+                        <button class="quick-btn text-xs bg-slate-800 hover:bg-slate-700 hover:text-amber-300 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition flex items-center gap-1.5"
+                                data-query="What utilities run under this stretch of road?">
                             <i class="fa-solid fa-circle-question text-amber-500 text-[10px]"></i>
                             <span>"What utilities run under this stretch of road?"</span>
                         </button>
 
-                        <button onclick="useQuickQuery('Has this road been dug up before, and why?')" 
-                                class="text-xs bg-slate-800 hover:bg-slate-700 hover:text-amber-300 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+                        <button class="quick-btn text-xs bg-slate-800 hover:bg-slate-700 hover:text-amber-300 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition flex items-center gap-1.5"
+                                data-query="Has this road been dug up before, and why?">
                             <i class="fa-solid fa-shovel text-amber-500 text-[10px]"></i>
                             <span>"Has this road been dug up before, and why?"</span>
                         </button>
 
-                        <button onclick="useQuickQuery('Is it safe to excavate here without further checks?')" 
-                                class="text-xs bg-slate-800 hover:bg-slate-700 hover:text-amber-300 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+                        <button class="quick-btn text-xs bg-slate-800 hover:bg-slate-700 hover:text-amber-300 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition flex items-center gap-1.5"
+                                data-query="Is it safe to excavate here without further checks?">
                             <i class="fa-solid fa-triangle-exclamation text-amber-500 text-[10px]"></i>
                             <span>"Is it safe to excavate here without further checks?"</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Question Input Area -->
-                <form id="queryForm" onsubmit="handleQuerySubmit(event)" class="flex flex-col sm:flex-row gap-3">
+                <!-- Input Area -->
+                <form id="queryForm" class="flex flex-col sm:flex-row gap-3">
                     <div class="relative flex-1">
                         <input type="text" id="userQueryInput" 
                                placeholder="e.g. Are there electrical cables near 1.3 meters depth?" 
@@ -385,20 +351,6 @@
 
             <!-- AI Response Box -->
             <div id="queryResultContainer" class="hidden space-y-4">
-                <!-- Conflict Callout Banner (Dynamically Shown) -->
-                <div id="conflictAlertBox" class="bg-amber-950/50 border border-amber-600/50 rounded-xl p-4 hidden flex items-start gap-3">
-                    <div class="p-2 bg-amber-500/20 text-amber-400 rounded-lg text-lg mt-0.5">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-amber-300 text-sm">Inter-Agency Conflicts & Gaps Detected</h4>
-                        <p class="text-xs text-amber-200/80 mt-0.5">
-                            Nagar Smriti found contradictory data points across BWSSB, BESCOM, and Permit records. Review cited discrepancies below.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Answer Card -->
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 relative">
                     <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
                         <div class="flex items-center gap-2">
@@ -408,17 +360,12 @@
                         <span class="text-[10px] font-mono text-slate-500">Model: gemini-1.5-flash</span>
                     </div>
 
-                    <!-- Loader State -->
                     <div id="queryLoadingState" class="hidden py-8 flex flex-col items-center justify-center text-center space-y-3">
                         <div class="w-8 h-8 border-3 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
                         <p class="text-sm text-slate-300 font-medium">Nagar Smriti is cross-referencing archival municipal logs...</p>
-                        <p class="text-xs text-slate-500">Comparing BWSSB 2002 survey with BESCOM 2019 GIS & 2020 Incident Reports...</p>
                     </div>
 
-                    <!-- Response Text Output -->
-                    <div id="queryOutputText" class="prose prose-invert max-w-none text-sm text-slate-300 leading-relaxed space-y-3">
-                        <!-- AI content will be inserted here -->
-                    </div>
+                    <div id="queryOutputText" class="prose prose-invert max-w-none text-sm text-slate-300 leading-relaxed space-y-3"></div>
                 </div>
             </div>
         </section>
@@ -426,7 +373,6 @@
         <!-- SCREEN 3: PERMIT RISK CHECK -->
         <section id="screen-permit" class="hidden space-y-6">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Form Column -->
                 <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
                     <div>
                         <h2 class="text-lg font-bold text-white flex items-center gap-2">
@@ -438,7 +384,7 @@
                         </p>
                     </div>
 
-                    <form id="permitForm" onsubmit="handlePermitSubmit(event)" class="space-y-4 pt-2">
+                    <form id="permitForm" class="space-y-4 pt-2">
                         <div>
                             <label class="block text-xs font-medium text-slate-300 mb-1">Target Street Segment</label>
                             <input type="text" readonly 
@@ -450,31 +396,29 @@
                             <label class="block text-xs font-medium text-slate-300 mb-1">Planned Dig Depth</label>
                             <select id="permitDepth" class="w-full bg-slate-950 border border-slate-700 text-slate-200 rounded-lg p-2.5 text-xs focus:border-amber-500 focus:outline-none">
                                 <option value="<1m">&lt; 1.0 meter (Shallow Fiber / Footpath)</option>
-                                <option value="1-2m" selected>1.0m - 2.0m (Standard Utility / Electrical Conduit Zone)</option>
-                                <option value=">2m">&gt; 2.0 meters (Deep Water Trunk / Heavy Sewerage Zone)</option>
+                                <option value="1-2m" selected>1.0m - 2.0m (Standard Utility Zone)</option>
+                                <option value=">2m">&gt; 2.0 meters (Deep Water / Sewerage Zone)</option>
                             </select>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-medium text-slate-300 mb-1">Requesting Agency / Entity</label>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Requesting Agency</label>
                             <select id="permitAgency" class="w-full bg-slate-950 border border-slate-700 text-slate-200 rounded-lg p-2.5 text-xs focus:border-amber-500 focus:outline-none">
                                 <option value="Private Telecom Contractor">Private Telecom Contractor</option>
-                                <option value="BWSSB (Water Dept)">BWSSB (Water & Sewerage)</option>
+                                <option value="BWSSB (Water Dept)">BWSSB (Water Dept)</option>
                                 <option value="BESCOM (Electricity)">BESCOM (Electricity)</option>
                                 <option value="Roads & Excavation Dept">Roads & Excavation Dept</option>
-                                <option value="Gas Utility Provider">Gas Utility Provider</option>
                             </select>
                         </div>
 
                         <button type="submit" id="permitSubmitBtn"
                                 class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-3 rounded-lg transition flex items-center justify-center gap-2 text-sm shadow-lg shadow-amber-600/20">
                             <i class="fa-solid fa-shield-halved"></i>
-                            <span>Evaluate Risk & Reconcile Records</span>
+                            <span>Evaluate Risk</span>
                         </button>
                     </form>
                 </div>
 
-                <!-- Result Column -->
                 <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
@@ -482,7 +426,6 @@
                                 <i class="fa-solid fa-gavel text-amber-500"></i>
                                 Risk Assessment & Clearance Verdict
                             </span>
-                            <span class="text-[10px] text-slate-500">Preventive Rule Engine</span>
                         </div>
 
                         <div id="permitInitialState" class="py-12 text-center text-slate-500 space-y-2">
@@ -490,306 +433,142 @@
                             <p class="text-xs">Fill out the permit details on the left and click "Evaluate Risk".</p>
                         </div>
 
-                        <!-- Permit Loader -->
                         <div id="permitLoadingState" class="hidden py-12 flex flex-col items-center justify-center text-center space-y-3">
                             <div class="w-8 h-8 border-3 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
-                            <p class="text-sm text-slate-300 font-medium">Evaluating historical incident clashes & missing depth layers...</p>
+                            <p class="text-sm text-slate-300 font-medium">Evaluating historical incident clashes...</p>
                         </div>
 
-                        <!-- Permit Verdict Output -->
                         <div id="permitResultContent" class="hidden space-y-4">
-                            <!-- Badge Header -->
-                            <div class="flex items-center gap-3">
-                                <div id="verdictBadge" class="px-4 py-2 rounded-lg font-black text-sm tracking-wider uppercase flex items-center gap-2 border">
-                                    <!-- Badge content inserted via JS -->
-                                </div>
-                            </div>
-
-                            <!-- Verdict Reasoning Text -->
-                            <div id="verdictReasoning" class="prose prose-invert max-w-none text-xs text-slate-300 leading-relaxed bg-slate-950 p-4 rounded-lg border border-slate-800">
-                                <!-- Text inserted via JS -->
-                            </div>
+                            <div id="verdictReasoning" class="prose prose-invert max-w-none text-xs text-slate-300 leading-relaxed bg-slate-950 p-4 rounded-lg border border-slate-800"></div>
                         </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500 flex justify-between">
-                        <span>Framework: CAG Audit Compliance Protocol</span>
-                        <span>Mode: Zero-Silent-Suppression</span>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800/80 bg-slate-950 py-4 text-center text-xs text-slate-500">
-        <p>Nagar Smriti Proof-of-Concept • Hackathon Demo • Powered by Google Gemini 2.5 Flash</p>
+        <p>Nagar Smriti Proof-of-Concept • Powered by Google Gemini 1.5 Flash</p>
     </footer>
 
-    <!-- Application Logic Script -->
+    <!-- JS Logic -->
     <script type="module">
-      function getApiKey() {
-  let key = localStorage.getItem("NAGAR_SMRITI_KEY");
-  if (!key) {
-    key = prompt("Please enter your Gemini API Key:");
-    if (key) localStorage.setItem("NAGAR_SMRITI_KEY", key);
-  }
-  return key;
-}
-const apiKey = getApiKey();
-      
-import { GoogleGenAI } from 'https://esm.run/@google/genai';
+        import { GoogleGenAI } from 'https://esm.run/@google/genai';
 
-        // --- Embedded DEMO DATA ---
-        const DEMO_DATA = {
-            BWSSB: `AGENCY 1 — Bengaluru Water Supply & Sewerage Board (BWSSB)
-RECORD TYPE: Underground pipeline map (digitized scan)
-SEGMENT: MG Road, between Junction A (Church Street) and Junction B (Brigade Road)
-SOURCE MAP BASE YEAR: 2002 road survey
-LAST FIELD VERIFICATION: Not recorded since 2002
-PIPELINE DETAILS:
-  - 450mm sewage trunk line, approximate depth 2.1m, laid 1998
-  - 200mm water supply line, approximate depth 1.4m, laid 2002
-NOTES (handwritten annotation, transcribed): "Road widened after this map was made — pipeline position relative to current road edge not re-surveyed. Approximate only."
-STATUS: No coordinate/GIS data attached. Paper record only, digitized 2019.`,
+        const DEMO_DATA = `
+AGENCY 1 — BWSSB: 450mm sewage line (~2.1m depth, 1998), 200mm water line (~1.4m depth, 2002). Map base 2002. Note: Road widened after map creation.
+AGENCY 2 — BESCOM: 11kV cable in corridor. Depth: UNKNOWN. 17% unmapped zone. Zero cross-verification with BWSSB.
+AGENCY 3 — ROADS LOG: 2015 Fiber (~1m), 2020 Emergency BWSSB repair hit unmarked electrical cable at ~1.3m depth.
+        `;
 
-            BESCOM: `AGENCY 2 — Bangalore Electricity Supply Company (BESCOM)
-RECORD TYPE: GIS export (partial network)
-SEGMENT: MG Road corridor, Ward 7
-NETWORK MAPPING COMPLETENESS: 83% of ward network mapped as of last audit
-LAST UPDATED: 2019-11-03
-CABLE DETAILS:
-  - 11kV underground feeder cable present in this corridor (exact chainage not available — falls in unmapped 17%)
-  - Depth: NOT RECORDED (GIS system does not capture depth field)
-  - Format: 2D only, no elevation/depth layer
-NOTES: Cross-verification with BWSSB or road department records: NONE ON FILE.`,
+        // Local Storage Key Management
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const saveKeyBtn = document.getElementById('saveKeyBtn');
 
-            ROADS: `AGENCY 3 — Roads & Excavation Permits Department
-RECORD TYPE: Road-cutting permit history log
-SEGMENT: MG Road, Junction A to Junction B
-PERMIT HISTORY:
-  - 2015: Permit #RC-2015-0447 issued to telecom contractor for fiber cable laying. Depth logged: "approx 1m". No utility clash reported. No as-built drawing filed after completion (required but not enforced).
-  - 2020: Permit #RC-2020-1183 issued to BWSSB for "emergency sewage line repair — pipe location uncertain, located via probing during excavation." Excavation crew reported striking an unmarked electrical conduit at approx. 1.3m depth — no injury, work paused 2 days, no formal report filed with BESCOM afterward.
-  - 2023: Citizen complaint (Ref #CC-2023-8821) — "Same stretch of MG Road dug up twice within 8 months, once by water dept, once by telecom. Nobody seems to check what the other did."
-NOTES: No unified GIS layer combining all three departments' work on this segment exists as of this filing.`
-        };
+        const savedKey = localStorage.getItem('NAGAR_SMRITI_KEY');
+        if (savedKey) apiKeyInput.value = savedKey;
 
-        const COMBINED_AGENCY_RECORDS = `=== MUNICIPAL ARCHIVAL RECORDS ===\n\n${DEMO_DATA.BWSSB}\n\n${DEMO_DATA.BESCOM}\n\n${DEMO_DATA.ROADS}`;
-
-        // Global State Variable for API Key
-        let apiKey = localStorage.getItem('nagar_smriti_gemini_key') || '';
-
-        window.onload = function() {
-            if (apiKey) {
-                document.getElementById('apiKeyInput').value = apiKey;
+        saveKeyBtn.addEventListener('click', () => {
+            const key = apiKeyInput.value.trim();
+            if (key) {
+                localStorage.setItem('NAGAR_SMRITI_KEY', key);
+                alert('API Key saved successfully!');
+            } else {
+                alert('Please enter a valid key.');
             }
+        });
+
+        // Tab Switcher
+        window.switchTab = (tabName) => {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('border-amber-500', 'text-amber-400');
+                b.classList.add('border-transparent', 'text-slate-400');
+            });
+
+            document.getElementById(`screen-${tabName}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.classList.add('border-amber-500', 'text-amber-400');
+            activeTab.classList.remove('border-transparent', 'text-slate-400');
         };
 
-        window.saveApiKey = function() {
-            const inputVal = document.getElementById('apiKeyInput').value.trim();
-            if (!inputVal) {
-                alert("Please enter a valid Gemini API key.");
+        document.getElementById('tab-records').onclick = () => switchTab('records');
+        document.getElementById('tab-query').onclick = () => switchTab('query');
+        document.getElementById('tab-permit').onclick = () => switchTab('permit');
+
+        // Quick Queries
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.getElementById('userQueryInput').value = btn.dataset.query;
+            };
+        });
+
+        // AI Query Handler
+        document.getElementById('queryForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const key = localStorage.getItem('NAGAR_SMRITI_KEY') || apiKeyInput.value.trim();
+            if (!key) {
+                alert('Please save your Gemini API Key first!');
                 return;
             }
-            apiKey = inputVal;
-            localStorage.setItem('nagar_smriti_gemini_key', apiKey);
-            alert("Gemini API key saved for this browser session!");
-        };
 
-        // Navigation Tab Switching
-        window.switchTab = function(tabName) {
-            const tabs = ['records', 'query', 'permit'];
-            tabs.forEach(t => {
-                const btn = document.getElementById(`tab-${t}`);
-                const screen = document.getElementById(`screen-${t}`);
-                if (t === tabName) {
-                    btn.classList.add('border-amber-500', 'text-amber-400');
-                    btn.classList.remove('border-transparent', 'text-slate-400');
-                    screen.classList.remove('hidden');
-                } else {
-                    btn.classList.remove('border-amber-500', 'text-amber-400');
-                    btn.classList.add('border-transparent', 'text-slate-400');
-                    screen.classList.add('hidden');
-                }
-            });
-        };
+            const query = document.getElementById('userQueryInput').value;
+            const container = document.getElementById('queryResultContainer');
+            const loader = document.getElementById('queryLoadingState');
+            const output = document.getElementById('queryOutputText');
 
-        window.useQuickQuery = function(qText) {
-            document.getElementById('userQueryInput').value = qText;
-            document.getElementById('queryForm').requestSubmit();
-        };
-
-        // Formatting citations into stylized HTML badges
-        function formatCitations(text) {
-            if (!text) return '';
-            // Replace markdown citations like [BWSSB-2002], [BESCOM-2019], [ROADS-2020], [BWSSB] with styled tags
-            return text
-                .replace(/\[(BWSSB[^\]]*)\]/gi, '<span class="citation-badge citation-bwssb">💧 $1</span>')
-                .replace(/\[(BESCOM[^\]]*)\]/gi, '<span class="citation-badge citation-bescom">⚡ $1</span>')
-                .replace(/\[(ROADS[^\]]*|PERMITS[^\]]*)\]/gi, '<span class="citation-badge citation-roads">🚧 $1</span>');
-        }
-
-        // --- API CALL 1: Ask Nagar Smriti Chat ---
-        window.handleQuerySubmit = async function(e) {
-            e.preventDefault();
-            const userQuery = document.getElementById('userQueryInput').value.trim();
-            if (!userQuery) return;
-
-           let currentKey = apiKey || localStorage.getItem("NAGAR_SMRITI_KEY");
-if (!currentKey) {
-  currentKey = prompt("Please enter your Gemini API Key:");
-  if (currentKey) {
-    localStorage.setItem("NAGAR_SMRITI_KEY", currentKey);
-  } else {
-    return;
-  }
-}
-
-            const resultContainer = document.getElementById('queryResultContainer');
-            const loadingState = document.getElementById('queryLoadingState');
-            const outputText = document.getElementById('queryOutputText');
-            const conflictAlert = document.getElementById('conflictAlertBox');
-            const submitBtn = document.getElementById('querySubmitBtn');
-
-            // UI Reset
-            resultContainer.classList.remove('hidden');
-            loadingState.classList.remove('hidden');
-            outputText.innerHTML = '';
-            conflictAlert.classList.add('hidden');
-            submitBtn.disabled = true;
-            submitBtn.classList.add('opacity-50');
+            container.classList.remove('hidden');
+            loader.classList.remove('hidden');
+            output.innerHTML = '';
 
             try {
-    const ai = new GoogleGenAI({ apiKey: currentKey });
-    const response = await ai.models.generateContent({
-      model: 'gemini-1.5-flash',
-      contents: prompt,
-      config: {
-        systemInstruction: systemInstruction,
-        temperature: 0.2
-      }
-    });
-                const ai = new GoogleGenAI({ apiKey: currentKey });
+                const ai = new GoogleGenAI({ apiKey: key });
                 const response = await ai.models.generateContent({
                     model: 'gemini-1.5-flash',
-                    contents: prompt,
-                    config: {
-                        systemInstruction: systemInstruction,
-                        temperature: 0.2
-                    }
+                    contents: `You are Nagar Smriti AI. Synthesize these municipal records to answer the user request:\n${DEMO_DATA}\nUser Question: ${query}`
                 });
 
-                const rawText = response.text || "No output returned from Nagar Smriti.";
-                
-                // Parse markdown and inject citation badges
-                let parsedHtml = marked.parse(rawText);
-                parsedHtml = formatCitations(parsedHtml);
-
-                outputText.innerHTML = parsedHtml;
-
-                // Detect if model flagged conflicts
-                if (rawText.toLowerCase().includes('conflict') || 
-                    rawText.toLowerCase().includes('contradict') || 
-                    rawText.toLowerCase().includes('unmarked') ||
-                    rawText.toLowerCase().includes('mismatch') ||
-                    rawText.toLowerCase().includes('gap')) {
-                    conflictAlert.classList.remove('hidden');
-                }
-
+                output.innerHTML = marked.parse(response.text);
             } catch (err) {
-                console.error(err);
-                outputText.innerHTML = `<div class="p-3 bg-red-950/60 border border-red-800 text-red-300 rounded-lg text-xs">
-                    <strong>API Error:</strong> ${err.message || 'Failed to communicate with Gemini API. Check your API key.'}
-                </div>`;
+                output.innerHTML = `<span class="text-red-400">Error: ${err.message}</span>`;
             } finally {
-                loadingState.classList.add('hidden');
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-50');
+                loader.classList.add('hidden');
             }
         };
 
-        // --- API CALL 2: Permit Risk Checker ---
-        window.handlePermitSubmit = async function(e) {
+        // Permit Assessment Handler
+        document.getElementById('permitForm').onsubmit = async (e) => {
             e.preventDefault();
-
-            if (!apiKey) {
-                alert("Please enter your Gemini API Key in the top bar before submitting!");
-                document.getElementById('apiKeyInput').focus();
+            const key = localStorage.getItem('NAGAR_SMRITI_KEY') || apiKeyInput.value.trim();
+            if (!key) {
+                alert('Please save your Gemini API Key first!');
                 return;
             }
 
             const depth = document.getElementById('permitDepth').value;
             const agency = document.getElementById('permitAgency').value;
+            const initial = document.getElementById('permitInitialState');
+            const loader = document.getElementById('permitLoadingState');
+            const content = document.getElementById('permitResultContent');
+            const reasoning = document.getElementById('verdictReasoning');
 
-            const initialState = document.getElementById('permitInitialState');
-            const loadingState = document.getElementById('permitLoadingState');
-            const resultContent = document.getElementById('permitResultContent');
-            const verdictBadge = document.getElementById('verdictBadge');
-            const verdictReasoning = document.getElementById('verdictReasoning');
-            const submitBtn = document.getElementById('permitSubmitBtn');
-
-            initialState.classList.add('hidden');
-            resultContent.classList.add('hidden');
-            loadingState.classList.remove('hidden');
-            submitBtn.disabled = true;
-            submitBtn.classList.add('opacity-50');
-
-            const systemInstruction = `You are a preventive risk-checker for excavation permits. Given the same three agency records as before and these new permit request details, determine whether there is enough consistent information to safely approve this dig, or whether there are unresolved conflicts/gaps that should trigger mandatory physical verification first. Give a clear verdict — APPROVE, APPROVE WITH CONDITIONS, or HOLD FOR VERIFICATION — with your reasoning and citations, in under 120 words. Format the first line as EXACTLY one of: "VERDICT: APPROVE", "VERDICT: APPROVE WITH CONDITIONS", or "VERDICT: HOLD FOR VERIFICATION".`;
-
-            const prompt = `AGENCY RECORDS:\n${COMBINED_AGENCY_RECORDS}\n\nNEW PERMIT REQUEST:\nStreet: MG Road (Junction A to B)\nDepth requested: ${depth}\nRequesting Entity: ${agency}`;
+            initial.classList.add('hidden');
+            content.classList.remove('hidden');
+            loader.classList.remove('hidden');
+            reasoning.innerHTML = '';
 
             try {
-                const ai = new GoogleGenAI({ apiKey: apiKey });
+                const ai = new GoogleGenAI({ apiKey: key });
                 const response = await ai.models.generateContent({
                     model: 'gemini-1.5-flash',
-                    contents: prompt,
-                    config: {
-                        systemInstruction: systemInstruction,
-                        temperature: 0.1
-                    }
+                    contents: `Evaluate excavation risk for Agency: ${agency} digging at Depth: ${depth}. Context:\n${DEMO_DATA}\nGive a clear verdict (APPROVED WITH CONDITIONAL RISKS or REJECTED) and explain why.`
                 });
 
-                const rawText = response.text || "VERDICT: HOLD FOR VERIFICATION\nUnable to verify.";
-
-                // Parse Verdict Tag
-                let verdictType = "HOLD FOR VERIFICATION";
-                if (rawText.includes("VERDICT: APPROVE WITH CONDITIONS")) {
-                    verdictType = "APPROVE WITH CONDITIONS";
-                } else if (rawText.includes("VERDICT: APPROVE") && !rawText.includes("CONDITIONS")) {
-                    verdictType = "APPROVE";
-                } else if (rawText.includes("HOLD FOR VERIFICATION")) {
-                    verdictType = "HOLD FOR VERIFICATION";
-                }
-
-                // Render Badge
-                if (verdictType === "APPROVE") {
-                    verdictBadge.className = "px-4 py-2 rounded-lg font-black text-sm uppercase tracking-wider bg-emerald-950 border-emerald-500 text-emerald-400 flex items-center gap-2";
-                    verdictBadge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> APPROVE`;
-                } else if (verdictType === "APPROVE WITH CONDITIONS") {
-                    verdictBadge.className = "px-4 py-2 rounded-lg font-black text-sm uppercase tracking-wider bg-amber-950 border-amber-500 text-amber-300 flex items-center gap-2";
-                    verdictBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-400"></i> APPROVE WITH CONDITIONS`;
-                } else {
-                    verdictBadge.className = "px-4 py-2 rounded-lg font-black text-sm uppercase tracking-wider bg-rose-950 border-rose-500 text-rose-300 flex items-center gap-2";
-                    verdictBadge.innerHTML = `<i class="fa-solid fa-ban text-rose-400"></i> HOLD FOR VERIFICATION`;
-                }
-
-                // Clean reasoning text & format citations
-                let cleanReasoning = rawText.replace(/VERDICT:\s*[A-Z\s]+/g, '').trim();
-                let parsedHtml = marked.parse(cleanReasoning);
-                parsedHtml = formatCitations(parsedHtml);
-
-                verdictReasoning.innerHTML = parsedHtml;
-                resultContent.classList.remove('hidden');
-
+                reasoning.innerHTML = marked.parse(response.text);
             } catch (err) {
-                console.error(err);
-                verdictReasoning.innerHTML = `<span class="text-red-400">Error: ${err.message || 'Failed to complete risk evaluation.'}</span>`;
-                resultContent.classList.remove('hidden');
+                reasoning.innerHTML = `<span class="text-red-400">Error: ${err.message}</span>`;
             } finally {
-                loadingState.classList.add('hidden');
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-50');
+                loader.classList.add('hidden');
             }
         };
     </script>
